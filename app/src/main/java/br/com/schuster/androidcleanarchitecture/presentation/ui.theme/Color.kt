@@ -1,4 +1,4 @@
-package br.com.schuster.androidcleanarchitecture.ui.theme
+package br.com.schuster.androidcleanarchitecture.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package br.com.schuster.androidcleanarchitecture.presentation
+package br.com.schuster.androidcleanarchitecture.presentation.feature
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -32,22 +32,25 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.schuster.androidcleanarchitecture.R
 import br.com.schuster.androidcleanarchitecture.data.api.ApiState
 import br.com.schuster.androidcleanarchitecture.data.api.Status
+import br.com.schuster.androidcleanarchitecture.presentation.components.CustomSearchView
+import br.com.schuster.androidcleanarchitecture.presentation.components.ErrorScreen
+import br.com.schuster.androidcleanarchitecture.presentation.components.ShimmerScreen
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun ScaffoldLayout(
+fun MainScreen(
     viewModel: MainViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    ScaffoldLayoutContent(viewModel, uiState)
+    MainScreenContent(viewModel, uiState)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScaffoldLayoutContent(
+fun MainScreenContent(
     viewModel: MainViewModel,
     uiStateValue: ApiState
 ) {

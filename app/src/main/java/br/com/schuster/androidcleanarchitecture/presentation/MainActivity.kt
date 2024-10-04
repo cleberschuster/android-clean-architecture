@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import br.com.schuster.androidcleanarchitecture.presentation.feature.MainScreen
 import br.com.schuster.androidcleanarchitecture.presentation.ui.theme.AndroidCleanArchitectureTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
                 AndroidCleanArchitectureTheme {
-                    ScaffoldLayout()
+                    MainScreen()
                 }
         }
     }

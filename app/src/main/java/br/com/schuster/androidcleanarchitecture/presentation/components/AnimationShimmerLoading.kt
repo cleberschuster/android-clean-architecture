@@ -1,4 +1,4 @@
-package br.com.schuster.androidcleanarchitecture.presentation
+package br.com.schuster.androidcleanarchitecture.presentation.components
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode

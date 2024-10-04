@@ -8,7 +8,7 @@ import br.com.schuster.androidcleanarchitecture.data.retrofit.HttpClient
 import br.com.schuster.androidcleanarchitecture.data.retrofit.RetrofitClient
 import br.com.schuster.androidcleanarchitecture.domain.repository.PostRepository
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
-import br.com.schuster.androidcleanarchitecture.presentation.MainViewModel
+import br.com.schuster.androidcleanarchitecture.presentation.feature.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

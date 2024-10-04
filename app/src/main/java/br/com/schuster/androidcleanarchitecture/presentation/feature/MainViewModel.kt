@@ -1,4 +1,4 @@
-package br.com.schuster.androidcleanarchitecture.presentation
+package br.com.schuster.androidcleanarchitecture.presentation.feature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

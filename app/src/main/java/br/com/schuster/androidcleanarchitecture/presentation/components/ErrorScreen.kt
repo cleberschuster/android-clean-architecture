@@ -1,4 +1,4 @@
-package br.com.schuster.androidcleanarchitecture.presentation
+package br.com.schuster.androidcleanarchitecture.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

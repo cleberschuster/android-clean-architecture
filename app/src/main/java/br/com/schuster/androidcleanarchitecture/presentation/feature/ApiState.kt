@@ -1,4 +1,4 @@
-package br.com.schuster.androidcleanarchitecture.data.api
+package br.com.schuster.androidcleanarchitecture.presentation.feature
 
 import br.com.schuster.androidcleanarchitecture.presentation.model.ObjectPresentation
 

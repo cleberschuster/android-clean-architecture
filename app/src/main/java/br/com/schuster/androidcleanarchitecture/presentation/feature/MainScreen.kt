@@ -30,8 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.schuster.androidcleanarchitecture.R
-import br.com.schuster.androidcleanarchitecture.data.api.ApiState
-import br.com.schuster.androidcleanarchitecture.data.api.Status
 import br.com.schuster.androidcleanarchitecture.presentation.components.CustomSearchView
 import br.com.schuster.androidcleanarchitecture.presentation.components.ErrorScreen
 import br.com.schuster.androidcleanarchitecture.presentation.components.ShimmerScreen

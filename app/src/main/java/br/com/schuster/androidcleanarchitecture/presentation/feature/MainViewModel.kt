@@ -2,8 +2,6 @@ package br.com.schuster.androidcleanarchitecture.presentation.feature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.schuster.androidcleanarchitecture.data.api.ApiState
-import br.com.schuster.androidcleanarchitecture.data.api.Status
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
 import br.com.schuster.androidcleanarchitecture.utils.toErrorType
 import kotlinx.coroutines.Dispatchers

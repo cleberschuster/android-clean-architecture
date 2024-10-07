@@ -12,7 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -57,15 +57,16 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
         _uiState.update { it.copy(status = Status.LOADING) }
 
         viewModelScope.launch {
+
             if (textSearch.isBlank()) {
                 _uiEvent.send(UiEvent.ShowSnackbar(message = "a pesquisa não pode ser vazia"))
                 return@launch
             }
 
-
-            delay(2000)
+            delay(1000)
 
             useCase.invoke(id.toInt())
+
                 .onEach { result ->
                     _uiState.update { currentState ->
                         currentState.copy(
@@ -74,7 +75,6 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                         )
                     }
                 }
-                //Trata erros de upstream
                 .catch {
                     if (it.toErrorType().toString() == "404") {
                         _uiState.update { currentState ->
@@ -91,8 +91,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                             )
                         }
                     }
-                }
-                .launchIn(this)
+                }.collect()
         }
     }
 }

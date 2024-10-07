@@ -80,7 +80,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                         _uiState.update { currentState ->
                             currentState.copy(
                                 status = Status.ERROR,
-                                message = " 404, faça a logica com o tipo do erro"
+                                message = "digite um id válido"
                             )
                         }
                     } else {

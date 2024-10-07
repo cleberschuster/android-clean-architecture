@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Android Clean Architecture</string>
-
     <string name="search">Pesquisar</string>
 </resources>

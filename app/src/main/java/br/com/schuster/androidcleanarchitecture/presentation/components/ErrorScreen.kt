@@ -20,7 +20,7 @@ fun ErrorScreen(modifier: Modifier = Modifier, uiStateError: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.outline_error_outline_24), contentDescription = ""
+            painter = painterResource(id = R.drawable.baseline_error_72), contentDescription = ""
         )
         Text(text = "Ocorreu um erro $uiStateError", modifier = Modifier.padding(16.dp))
     }

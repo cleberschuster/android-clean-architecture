@@ -7,7 +7,7 @@ import br.com.schuster.androidcleanarchitecture.presentation.model.ObjectPresent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.flowOn
 
 /*
 * Esta camada é responsável por chavear entre as fontes de dados.
@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 *
 */
 
-class YourRepositoryImpl(
+class PostRepositoryImpl(
     private val remoteDataSource: RemotePostDataSource
 ) : PostRepository {
 
@@ -28,9 +28,10 @@ class YourRepositoryImpl(
 
     override suspend fun getPost(id: Int): Flow<ObjectPresentation> = flow {
 
-        val response = withContext(Dispatchers.IO) {
-            mapper.map(remoteDataSource.getPost(id))
-        }
+        val response = mapper.map(remoteDataSource.getPost(id))
         emit(response)
-    }
+
+    }.flowOn(Dispatchers.IO)
 }
+
+

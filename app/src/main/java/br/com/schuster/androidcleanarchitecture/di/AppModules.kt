@@ -3,7 +3,7 @@ package br.com.schuster.androidcleanarchitecture.di
 import br.com.schuster.androidcleanarchitecture.data.api.PostApiService
 import br.com.schuster.androidcleanarchitecture.data.datasource.RemotePostDataSource
 import br.com.schuster.androidcleanarchitecture.data.datasource.RemotePostDataSourceImpl
-import br.com.schuster.androidcleanarchitecture.data.repository.YourRepositoryImpl
+import br.com.schuster.androidcleanarchitecture.data.repository.PostRepositoryImpl
 import br.com.schuster.androidcleanarchitecture.data.retrofit.HttpClient
 import br.com.schuster.androidcleanarchitecture.data.retrofit.RetrofitClient
 import br.com.schuster.androidcleanarchitecture.domain.repository.PostRepository
@@ -29,7 +29,7 @@ val presentationModules = module {
 
 val dataModules = module {
     factory<RemotePostDataSource> { RemotePostDataSourceImpl(api = get()) }
-    factory<PostRepository> { YourRepositoryImpl(remoteDataSource = get()) }
+    factory<PostRepository> { PostRepositoryImpl(remoteDataSource = get()) }
 }
 
 val networkModules = module {

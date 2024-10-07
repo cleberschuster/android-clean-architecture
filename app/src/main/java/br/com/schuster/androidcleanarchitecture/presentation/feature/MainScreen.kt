@@ -8,24 +8,27 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -39,23 +42,46 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel = koinViewModel()
+    viewModel: MainViewModel = koinViewModel(),
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() }
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    MainScreenContent(viewModel, uiState)
+    MainScreenContent(
+        viewModel = viewModel,
+        uiStateValue = uiState,
+        snackbarHostState = snackbarHostState,
+        onEvent = viewModel::onEvent
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenContent(
     viewModel: MainViewModel,
-    uiStateValue: ApiState
+    uiStateValue: ApiState,
+    snackbarHostState: SnackbarHostState,
+    onEvent: ( MainScreenEvent ) -> Unit
 ) {
 
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
-    var searchText by rememberSaveable { mutableStateOf("") }
+    val searchText = viewModel.textSearch
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { uiEvent ->
+            when (uiEvent) {
+                is UiEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(
+                        message = uiEvent.message
+                    )
+                }
+
+                is UiEvent.ShowToast -> {}
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -69,17 +95,15 @@ fun MainScreenContent(
                         modifier = Modifier.weight(1f),
                         search = searchText,
                         onValueChange = {
-                            searchText = it
-                        })
+                            onEvent(MainScreenEvent.OnValueChange(it))
+                        },
+                    )
 
                     IconButton(onClick = {
-                        if (searchText.isNotEmpty()) {
-                            // Pass latest query to refresh search results.
-                            coroutineScope.launch { viewModel.getNewComment(searchText.toInt()) }
-                        } else {
-                            Toast.makeText(context, "O text field esta vazio", Toast.LENGTH_SHORT).show()
-                        }
-
+                            coroutineScope.launch {
+                                keyboardController?.hide()
+                                onEvent(MainScreenEvent.OnClickSearch)
+                            }
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_launcher_background),
@@ -90,6 +114,10 @@ fun MainScreenContent(
             },
             )
         },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState )
+        }
+
     ) { paddingValues ->
         Column(
             modifier = Modifier.padding(paddingValues).fillMaxWidth(),

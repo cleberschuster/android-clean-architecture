@@ -58,7 +58,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
         viewModelScope.launch {
 
             if (textSearch.isBlank()) {
-                _uiEvent.send(UiEvent.ShowSnackbar(message = "a pesquisa não pode ser vazia"))
+                _uiEvent.send(UiEvent.ShowSnackbar())
                 return@launch
             }
 

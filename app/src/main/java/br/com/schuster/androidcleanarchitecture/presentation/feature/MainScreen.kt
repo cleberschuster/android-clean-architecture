@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -71,7 +72,7 @@ fun MainScreenContent(
             when (uiEvent) {
                 is UiEvent.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(
-                        message = uiEvent.message
+                        message = context.getString(R.string.search_not_empty)
                     )
                 }
             }
@@ -83,7 +84,9 @@ fun MainScreenContent(
             TopAppBar( {
 
                 Row (
-                    modifier = Modifier.padding(2.dp).fillMaxSize(),
+                    modifier = Modifier
+                        .padding(2.dp)
+                        .fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically
                 ){
                     CustomSearchView(
@@ -101,7 +104,8 @@ fun MainScreenContent(
                             }
                     }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
+                            modifier = Modifier.size(56.dp),
+                            painter = painterResource(id = R.drawable.rounded_radio_button_checked_24),
                             contentDescription = null,
                         )
                     }
@@ -115,7 +119,9 @@ fun MainScreenContent(
 
     ) { paddingValues ->
         Column(
-            modifier = Modifier.padding(paddingValues).fillMaxWidth(),
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

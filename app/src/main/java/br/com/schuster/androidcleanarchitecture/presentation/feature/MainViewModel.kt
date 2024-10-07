@@ -54,7 +54,6 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
     }
 
     private fun getNewComment(id: String) {
-        _uiState.update { it.copy(status = Status.LOADING) }
 
         viewModelScope.launch {
 
@@ -62,6 +61,8 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 _uiEvent.send(UiEvent.ShowSnackbar(message = "a pesquisa não pode ser vazia"))
                 return@launch
             }
+
+            _uiState.update { it.copy(status = Status.LOADING) }
 
             delay(1000)
 

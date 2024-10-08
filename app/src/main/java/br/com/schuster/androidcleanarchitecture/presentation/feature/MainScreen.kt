@@ -95,7 +95,6 @@ fun MainScreenContent(
     // If `lifecycleOwner` changes, dispose and reset the effect
     DisposableEffect(lifecycleOwner) {
         // Create an observer that triggers our remembered callbacks
-        // for sending analytics events
         val lifecycleObserver = LifecycleEventObserver { _, event ->
 
             when (event) {
@@ -212,7 +211,7 @@ fun MainScreenContent(
                 }
 
                 Status.ERROR -> {
-                    ErrorScreen(uiStateError = uiStateValue.message.toString() + stringResource(id = R.string.enter_valid_id))
+                    ErrorScreen(uiStateError = "${uiStateValue.message.toString()} ${stringResource(id = R.string.enter_valid_id)}")
                 }
 
                 Status.LOADING -> ShimmerScreen()

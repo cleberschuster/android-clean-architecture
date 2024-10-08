@@ -38,9 +38,9 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    init {
-        getNewComment(textSearch)
-    }
+//    init {
+//        getNewComment(textSearch)
+//    }
 
     fun onEvent(event: MainScreenEvent) {
         when (event) {

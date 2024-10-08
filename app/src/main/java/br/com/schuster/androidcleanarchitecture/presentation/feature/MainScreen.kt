@@ -68,6 +68,9 @@ fun MainScreenContent(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     LaunchedEffect(Unit) {
+
+        viewModel.onEvent(MainScreenEvent.OnClickSearch)
+
         viewModel.uiEvent.collect { uiEvent ->
             when (uiEvent) {
                 is UiEvent.ShowSnackbar -> {

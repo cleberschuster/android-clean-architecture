@@ -1,6 +1,5 @@
 package br.com.schuster.androidcleanarchitecture.presentation.feature
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -83,7 +83,7 @@ fun MainScreenContent(
             when (uiEvent) {
                 is UiEvent.ShowSnackbar -> {
                     snackbarHostState.showSnackbar(
-                        message = context.getString(R.string.search_not_empty)
+                        message = uiEvent.asString(context)
                     )
                 }
             }
@@ -104,9 +104,6 @@ fun MainScreenContent(
                     coroutineScope.launch {
                         onEvent(MainScreenEvent.OnSearch)
                     }
-                }
-                Lifecycle.Event.ON_RESUME -> {
-                    Toast.makeText(context, "ON_RESUME", Toast.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
@@ -215,7 +212,7 @@ fun MainScreenContent(
                 }
 
                 Status.ERROR -> {
-                    ErrorScreen(uiStateError = uiStateValue.message.toString())
+                    ErrorScreen(uiStateError = uiStateValue.message.toString() + stringResource(id = R.string.enter_valid_id))
                 }
 
                 Status.LOADING -> ShimmerScreen()

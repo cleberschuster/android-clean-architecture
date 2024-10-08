@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.schuster.androidcleanarchitecture.R
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
 import br.com.schuster.androidcleanarchitecture.utils.toErrorType
 import kotlinx.coroutines.channels.Channel
@@ -38,10 +39,6 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-//    init {
-//        getNewComment(textSearch)
-//    }
-
     fun onEvent(event: MainScreenEvent) {
         when (event) {
             is MainScreenEvent.OnValueChange -> {
@@ -58,7 +55,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
         viewModelScope.launch {
 
             if (textSearch.isBlank()) {
-                _uiEvent.send(UiEvent.ShowSnackbar())
+                _uiEvent.send(UiEvent.ShowSnackbar(resId = R.string.search_not_empty))
                 return@launch
             }
 
@@ -81,7 +78,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                         _uiState.update { currentState ->
                             currentState.copy(
                                 status = Status.ERROR,
-                                message = "digite um id válido"
+                                message = it.toErrorType().toString()
                             )
                         }
                     } else {

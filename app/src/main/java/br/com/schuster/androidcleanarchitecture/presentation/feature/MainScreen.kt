@@ -102,7 +102,7 @@ fun MainScreenContent(
 
                 Lifecycle.Event.ON_START -> {
                     coroutineScope.launch {
-                        onEvent(MainScreenEvent.OnClickSearch)
+                        onEvent(MainScreenEvent.OnSearch)
                     }
                 }
                 Lifecycle.Event.ON_RESUME -> {
@@ -142,7 +142,7 @@ fun MainScreenContent(
                     IconButton(onClick = {
                             coroutineScope.launch {
                                 keyboardController?.hide()
-                                onEvent(MainScreenEvent.OnClickSearch)
+                                onEvent(MainScreenEvent.OnSearch)
                             }
                     }) {
                         Icon(

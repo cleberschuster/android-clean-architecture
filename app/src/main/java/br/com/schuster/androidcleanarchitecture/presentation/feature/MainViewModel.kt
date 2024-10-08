@@ -47,7 +47,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
             is MainScreenEvent.OnValueChange -> {
                 textSearch = event.searchText.trim()
             }
-            is MainScreenEvent.OnClickSearch -> {
+            is MainScreenEvent.OnSearch -> {
                 getNewComment(textSearch)
             }
         }

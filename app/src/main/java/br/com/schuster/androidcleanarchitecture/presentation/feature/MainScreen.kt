@@ -1,5 +1,6 @@
 package br.com.schuster.androidcleanarchitecture.presentation.feature
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -29,6 +31,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.schuster.androidcleanarchitecture.R
 import br.com.schuster.androidcleanarchitecture.presentation.components.CustomSearchView
@@ -62,15 +67,18 @@ fun MainScreenContent(
     onEvent: ( MainScreenEvent ) -> Unit
 ) {
 
+    // official docomentation:
+    // https://developer.android.com/develop/ui/compose/side-effects?hl=pt-br#remembercoroutinescope
     val coroutineScope = rememberCoroutineScope()
+
     val context = LocalContext.current
     val searchText = viewModel.textSearch
     val keyboardController = LocalSoftwareKeyboardController.current
+    val lifecycleOwner = LocalLifecycleOwner.current
 
+    // official docomentation:
+    // https://developer.android.com/develop/ui/compose/side-effects?hl=pt-br#launchedeffect
     LaunchedEffect(Unit) {
-
-        viewModel.onEvent(MainScreenEvent.OnClickSearch)
-
         viewModel.uiEvent.collect { uiEvent ->
             when (uiEvent) {
                 is UiEvent.ShowSnackbar -> {
@@ -79,6 +87,37 @@ fun MainScreenContent(
                     )
                 }
             }
+        }
+    }
+
+    // official docomentation:
+    // https://developer.android.com/develop/ui/compose/side-effects?hl=pt-br#disposableeffect
+    // If `lifecycleOwner` changes, dispose and reset the effect
+    DisposableEffect(lifecycleOwner) {
+        // Create an observer that triggers our remembered callbacks
+        // for sending analytics events
+        val lifecycleObserver = LifecycleEventObserver { _, event ->
+
+            when (event) {
+
+                Lifecycle.Event.ON_START -> {
+                    coroutineScope.launch {
+                        onEvent(MainScreenEvent.OnClickSearch)
+                    }
+                }
+                Lifecycle.Event.ON_RESUME -> {
+                    Toast.makeText(context, "ON_RESUME", Toast.LENGTH_SHORT).show()
+                }
+                else -> {}
+            }
+        }
+
+        // Add the observer to the lifecycle
+        lifecycleOwner.lifecycle.addObserver(lifecycleObserver)
+
+        // When the effect leaves the Composition, remove the observer
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(lifecycleObserver)
         }
     }
 

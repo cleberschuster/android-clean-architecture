@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.schuster.androidcleanarchitecture.R
@@ -74,7 +75,7 @@ fun MainScreenContent(
     val context = LocalContext.current
     val searchText = viewModel.textSearch
     val keyboardController = LocalSoftwareKeyboardController.current
-    val lifecycleOwner = LocalLifecycleOwner.current
+    val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
 
     // official docomentation:
     // https://developer.android.com/develop/ui/compose/side-effects?hl=pt-br#launchedeffect

@@ -212,7 +212,7 @@ fun MainScreenContent(
                 }
 
                 Status.ERROR -> {
-                    ErrorScreen(uiStateError = "${uiStateValue.message.toString()} ${stringResource(id = R.string.enter_valid_id)}")
+                    ErrorScreen(uiStateError = uiStateValue.message.toString())
                 }
 
                 Status.LOADING -> ShimmerScreen()

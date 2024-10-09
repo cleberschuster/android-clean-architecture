@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import br.com.schuster.androidcleanarchitecture.R
 
@@ -22,6 +23,6 @@ fun ErrorScreen(modifier: Modifier = Modifier, uiStateError: String) {
         Image(
             painter = painterResource(id = R.drawable.baseline_error_72), contentDescription = ""
         )
-        Text(text = "Ocorreu um erro $uiStateError", modifier = Modifier.padding(16.dp))
+        Text(text = "${stringResource(id = R.string.error_text)} $uiStateError, ${stringResource(id = R.string.enter_valid_id)}", modifier = Modifier.padding(16.dp))
     }
 }

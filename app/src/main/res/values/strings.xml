@@ -2,5 +2,6 @@
     <string name="app_name">Android Clean Architecture</string>
     <string name="search">Pesquisar</string>
     <string name="search_not_empty">A pesquisa não pode ser vazia</string>">
+    <string name="error_text">Ocorreu um erro</string>">
     <string name="enter_valid_id">Digite um id válido</string>">
 </resources>

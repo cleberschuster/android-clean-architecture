@@ -78,14 +78,14 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                         _uiState.update { currentState ->
                             currentState.copy(
                                 status = Status.ERROR,
-                                message = it.toErrorType().toString()
+                                errorMessage = it.toErrorType().toString()
                             )
                         }
                     } else {
                         _uiState.update { currentState ->
                             currentState.copy(
                                 status = Status.ERROR,
-                                message = it.toErrorType().toString()
+                                errorMessage = it.toErrorType().toString()
                             )
                         }
                     }

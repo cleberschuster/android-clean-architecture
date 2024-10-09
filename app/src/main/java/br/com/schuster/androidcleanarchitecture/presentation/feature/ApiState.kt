@@ -5,7 +5,7 @@ import br.com.schuster.androidcleanarchitecture.presentation.model.ObjectPresent
 data class ApiState(
     val status: Status = Status.LOADING,
     val data: ObjectPresentation? = null,
-    val message: String ?= null
+    val errorMessage: String ?= null
 )
 
 enum class Status {

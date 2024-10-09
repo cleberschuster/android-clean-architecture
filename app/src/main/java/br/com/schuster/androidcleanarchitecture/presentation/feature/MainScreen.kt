@@ -173,47 +173,42 @@ fun MainScreenUiState(uiStateValue: ApiState, paddingValues: PaddingValues) {
         Text(text = "Post")
 
         when (uiStateValue.status) {
+
             Status.SUCCESS -> {
+                Column {
+                    Text(
+                        modifier = Modifier.padding(vertical = 16.dp),
+                        text = "COMENTARIO: ${uiStateValue.data?.comment}",
+                        style = TextStyle(fontSize = 16.sp)
+                    )
 
-                Column(
-                    modifier = Modifier
-                ) {
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        modifier = Modifier.padding(vertical = 16.dp),
+                        text = "EMAIL: ${uiStateValue.data?.email}",
+                        style = TextStyle(fontSize = 16.sp)
+                    )
 
-                    Column {
-                        Text(
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            text = "COMENTARIO: ${uiStateValue.data?.comment}",
-                            style = TextStyle(fontSize = 16.sp)
-                        )
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        modifier = Modifier.padding(vertical = 16.dp),
+                        text = "NOME: ${uiStateValue.data?.name}",
+                        style = TextStyle(fontSize = 16.sp)
+                    )
 
-                        Spacer(modifier = Modifier.padding(4.dp))
-                        Text(
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            text = "EMAIL: ${uiStateValue.data?.email}",
-                            style = TextStyle(fontSize = 16.sp)
-                        )
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        modifier = Modifier.padding(vertical = 16.dp),
+                        text = "ID: ${uiStateValue.data?.id}",
+                        style = TextStyle(fontSize = 16.sp)
+                    )
 
-                        Spacer(modifier = Modifier.padding(4.dp))
-                        Text(
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            text = "NOME: ${uiStateValue.data?.name}",
-                            style = TextStyle(fontSize = 16.sp)
-                        )
-
-                        Spacer(modifier = Modifier.padding(4.dp))
-                        Text(
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            text = "ID: ${uiStateValue.data?.id}",
-                            style = TextStyle(fontSize = 16.sp)
-                        )
-
-                        Spacer(modifier = Modifier.padding(4.dp))
-                        Text(
-                            modifier = Modifier.padding(vertical = 16.dp),
-                            text = "POST ID: ${uiStateValue.data?.postId}",
-                            style = TextStyle(fontSize = 16.sp)
-                        )
-                    }
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Text(
+                        modifier = Modifier.padding(vertical = 16.dp),
+                        text = "POST ID: ${uiStateValue.data?.postId}",
+                        style = TextStyle(fontSize = 16.sp)
+                    )
                 }
             }
 

@@ -1,12 +1,12 @@
 package br.com.schuster.androidcleanarchitecture.presentation.feature
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,6 +17,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -40,6 +41,7 @@ import br.com.schuster.androidcleanarchitecture.R
 import br.com.schuster.androidcleanarchitecture.presentation.components.CustomSearchView
 import br.com.schuster.androidcleanarchitecture.presentation.components.ErrorScreen
 import br.com.schuster.androidcleanarchitecture.presentation.components.ShimmerScreen
+import br.com.schuster.androidcleanarchitecture.presentation.ui.theme.PurpleGrey40
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -137,10 +139,10 @@ fun MainScreenContent(
                     )
 
                     IconButton(onClick = {
-                            coroutineScope.launch {
-                                keyboardController?.hide()
-                                onEvent(MainScreenEvent.OnSearch)
-                            }
+                        coroutineScope.launch {
+                            keyboardController?.hide()
+                            onEvent(MainScreenEvent.OnSearch)
+                        }
                     }) {
                         Icon(
                             modifier = Modifier.size(56.dp),
@@ -150,8 +152,13 @@ fun MainScreenContent(
                     }
                 }
             },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = PurpleGrey40
+                )
             )
+
         },
+
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState )
         }
@@ -167,8 +174,9 @@ fun MainScreenUiState(uiStateValue: ApiState, paddingValues: PaddingValues) {
     Column(
         modifier = Modifier
             .padding(paddingValues)
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.Center,
+            .fillMaxSize()
+            .background(color = PurpleGrey40),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
         when (uiStateValue.status) {
@@ -176,7 +184,7 @@ fun MainScreenUiState(uiStateValue: ApiState, paddingValues: PaddingValues) {
             Status.SUCCESS -> {
 
                 Text(
-                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
                     text = "COMENTARIO: ${uiStateValue.data?.comment}",
                     style = TextStyle(fontSize = 16.sp)
                 )

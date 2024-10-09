@@ -31,7 +31,7 @@ fun ShimmerScreen() {
 //            .fillMaxSize()
 //            .background(color = if (isLightModeActive) Color.White else Color.Black)
 //            .border(border = BorderStroke(width = 4.dp, color = Color.Black))
-            .padding(8.dp)
+            .padding(top = 16.dp, start = 16.dp)
     ) {
         Column(
             modifier = Modifier

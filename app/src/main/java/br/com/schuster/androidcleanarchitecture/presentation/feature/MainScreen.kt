@@ -2,6 +2,7 @@ package br.com.schuster.androidcleanarchitecture.presentation.feature
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -156,66 +157,71 @@ fun MainScreenContent(
         }
 
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "Post")
+        MainScreenUiState(uiStateValue, paddingValues)
+    }
+}
 
-            when (uiStateValue.status) {
-                Status.SUCCESS -> {
+@Composable
+fun MainScreenUiState(uiStateValue: ApiState, paddingValues: PaddingValues) {
+    Column(
+        modifier = Modifier
+            .padding(paddingValues)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Post")
 
-                    Column(
-                        modifier = Modifier
-                    ) {
+        when (uiStateValue.status) {
+            Status.SUCCESS -> {
 
-                        Column {
-                            Text(
-                                modifier = Modifier.padding(vertical = 16.dp),
-                                text = "COMENTARIO: ${uiStateValue.data?.comment}",
-                                style = TextStyle(fontSize = 16.sp)
-                            )
+                Column(
+                    modifier = Modifier
+                ) {
 
-                            Spacer(modifier = Modifier.padding(4.dp))
-                            Text(
-                                modifier = Modifier.padding(vertical = 16.dp),
-                                text = "EMAIL: ${uiStateValue.data?.email}",
-                                style = TextStyle(fontSize = 16.sp)
-                            )
+                    Column {
+                        Text(
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            text = "COMENTARIO: ${uiStateValue.data?.comment}",
+                            style = TextStyle(fontSize = 16.sp)
+                        )
 
-                            Spacer(modifier = Modifier.padding(4.dp))
-                            Text(
-                                modifier = Modifier.padding(vertical = 16.dp),
-                                text = "NOME: ${uiStateValue.data?.name}",
-                                style = TextStyle(fontSize = 16.sp)
-                            )
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        Text(
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            text = "EMAIL: ${uiStateValue.data?.email}",
+                            style = TextStyle(fontSize = 16.sp)
+                        )
 
-                            Spacer(modifier = Modifier.padding(4.dp))
-                            Text(
-                                modifier = Modifier.padding(vertical = 16.dp),
-                                text = "ID: ${uiStateValue.data?.id}",
-                                style = TextStyle(fontSize = 16.sp)
-                            )
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        Text(
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            text = "NOME: ${uiStateValue.data?.name}",
+                            style = TextStyle(fontSize = 16.sp)
+                        )
 
-                            Spacer(modifier = Modifier.padding(4.dp))
-                            Text(
-                                modifier = Modifier.padding(vertical = 16.dp),
-                                text = "POST ID: ${uiStateValue.data?.postId}",
-                                style = TextStyle(fontSize = 16.sp)
-                            )
-                        }
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        Text(
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            text = "ID: ${uiStateValue.data?.id}",
+                            style = TextStyle(fontSize = 16.sp)
+                        )
+
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        Text(
+                            modifier = Modifier.padding(vertical = 16.dp),
+                            text = "POST ID: ${uiStateValue.data?.postId}",
+                            style = TextStyle(fontSize = 16.sp)
+                        )
                     }
                 }
-
-                Status.ERROR -> {
-                    ErrorScreen(uiStateError = uiStateValue.errorMessage.toString())
-                }
-
-                Status.LOADING -> ShimmerScreen()
             }
+
+            Status.ERROR -> {
+                ErrorScreen(uiStateError = uiStateValue.errorMessage.toString())
+            }
+
+            Status.LOADING -> ShimmerScreen()
         }
     }
 }

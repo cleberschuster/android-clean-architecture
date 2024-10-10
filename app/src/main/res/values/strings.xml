@@ -4,4 +4,7 @@
     <string name="search_not_empty">A pesquisa não pode ser vazia</string>">
     <string name="error_text">Ocorreu um erro</string>">
     <string name="enter_valid_id">Digite um id válido</string>">
+    <string name="search_list_main_search">Digite um id para pesquisar</string>
+    <string name="icon_search">Ícone Buscar</string>
+    <string name="icon_close">Ícone Fechar</string>
 </resources>

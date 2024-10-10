@@ -21,8 +21,14 @@ fun ErrorScreen(modifier: Modifier, uiStateError: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.baseline_error_72), contentDescription = ""
+            painter = painterResource(
+                id = R.drawable.baseline_error_72),
+                contentDescription = "${stringResource(id = R.string.error_text)} $uiStateError," +
+                        " ${stringResource(id = R.string.enter_valid_id)}"
         )
-        Text(text = "${stringResource(id = R.string.error_text)} $uiStateError, ${stringResource(id = R.string.enter_valid_id)}", modifier = Modifier.padding(16.dp))
+        Text(
+            text = "${stringResource(id = R.string.error_text)} $uiStateError," +
+                    " ${stringResource(id = R.string.enter_valid_id)}",
+            modifier = Modifier.padding(16.dp))
     }
 }

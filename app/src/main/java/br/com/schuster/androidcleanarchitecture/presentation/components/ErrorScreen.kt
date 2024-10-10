@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import br.com.schuster.androidcleanarchitecture.R
 
 @Composable
-fun ErrorScreen(modifier: Modifier = Modifier, uiStateError: String) {
+fun ErrorScreen(modifier: Modifier, uiStateError: String) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,

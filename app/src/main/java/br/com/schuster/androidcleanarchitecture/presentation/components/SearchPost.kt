@@ -44,8 +44,7 @@ fun SearchTopBar(
         modifier = modifier.height(56.dp)
     ) {
         TextField(
-            modifier = Modifier.fillMaxWidth()
-                .clip(CircleShape.copy(all = CornerSize(10.dp))),
+            modifier = Modifier.clip(CircleShape.copy(all = CornerSize(10.dp))).fillMaxWidth(),
             value = currentSearchText,
             colors = TextFieldDefaults.colors(
                 Color.Gray,

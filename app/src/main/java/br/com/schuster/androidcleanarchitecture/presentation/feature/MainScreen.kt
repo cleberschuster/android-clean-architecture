@@ -120,7 +120,6 @@ fun MainScreenContent(
         topBar = {
             TopAppBar( {
                     SearchTopBar(
-                        modifier = Modifier.fillMaxWidth(),
                         currentSearchText = searchText,
                         onSearchTextChanged = {
                             onEvent(MainScreenEvent.OnValueChange(it))

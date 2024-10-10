@@ -4,7 +4,6 @@ package br.com.schuster.androidcleanarchitecture.presentation.components
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardActions
@@ -42,10 +41,11 @@ fun SearchTopBar(
     onSearchIconPressed: () -> Unit
 ) {
     Box(
-        modifier = modifier.height(48.dp)
+        modifier = modifier.height(56.dp)
     ) {
         TextField(
-            modifier = Modifier.fillMaxWidth().clip(CircleShape.copy(all = CornerSize(10.dp))),
+            modifier = Modifier.fillMaxWidth()
+                .clip(CircleShape.copy(all = CornerSize(10.dp))),
             value = currentSearchText,
             colors = TextFieldDefaults.colors(
                 Color.Gray,
@@ -59,7 +59,6 @@ fun SearchTopBar(
             },
             placeholder = {
                 Text(
-                    modifier = Modifier.size(size = 12.dp),
                     text = stringResource(id = R.string.search_list_main_search),
                     color = Color.Gray
                 )

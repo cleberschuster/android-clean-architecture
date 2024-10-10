@@ -24,7 +24,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
         // ApiState() ja inicializei os valores na propria classe
-        ApiState()
+        ScreenState()
     )
 
     val uiState = _uiState.stateIn(
@@ -56,6 +56,12 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
 
             if (textSearch.isBlank()) {
                 _uiEvent.send(UiEvent.ShowSnackbar(resId = R.string.search_not_empty))
+
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        status = Status.INPUT_ERROR,
+                    )
+                }
                 return@launch
             }
 

@@ -32,3 +32,21 @@ fun ErrorScreen(modifier: Modifier, uiStateError: String) {
             modifier = Modifier.padding(16.dp))
     }
 }
+
+@Composable
+fun ErrorScreenInputSearch(modifier: Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(
+                id = R.drawable.baseline_error_72),
+            contentDescription = stringResource(id = R.string.search_not_empty)
+        )
+        Text(
+            text = stringResource(id = R.string.search_not_empty),
+            modifier = Modifier.padding(16.dp))
+    }
+}

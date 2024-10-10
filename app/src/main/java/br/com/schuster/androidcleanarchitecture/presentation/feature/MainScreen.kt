@@ -41,6 +41,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.com.schuster.androidcleanarchitecture.R
 import br.com.schuster.androidcleanarchitecture.presentation.components.CustomSearchView
 import br.com.schuster.androidcleanarchitecture.presentation.components.ErrorScreen
+import br.com.schuster.androidcleanarchitecture.presentation.components.ErrorScreenInputSearch
 import br.com.schuster.androidcleanarchitecture.presentation.components.ShimmerScreen
 import br.com.schuster.androidcleanarchitecture.presentation.ui.theme.PurpleGrey40
 import kotlinx.coroutines.launch
@@ -66,7 +67,7 @@ fun MainScreen(
 @Composable
 fun MainScreenContent(
     viewModel: MainViewModel,
-    uiStateValue: ApiState,
+    uiStateValue: ScreenState,
     snackbarHostState: SnackbarHostState,
     onEvent: ( MainScreenEvent ) -> Unit
 ) {
@@ -170,7 +171,7 @@ fun MainScreenContent(
 }
 
 @Composable
-fun MainScreenUiState(uiStateValue: ApiState, paddingValues: PaddingValues) {
+fun MainScreenUiState(uiStateValue: ScreenState, paddingValues: PaddingValues) {
 
     Column(
         modifier = Modifier
@@ -227,6 +228,11 @@ fun MainScreenUiState(uiStateValue: ApiState, paddingValues: PaddingValues) {
             }
 
             Status.LOADING -> ShimmerScreen()
+
+            Status.INPUT_ERROR -> ErrorScreenInputSearch(
+                Modifier.fillMaxWidth()
+                    .padding(top = 48.dp)
+                )
         }
     }
 }

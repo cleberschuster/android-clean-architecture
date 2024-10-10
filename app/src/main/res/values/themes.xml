@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CustomSplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/purple_500</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="postSplashScreenTheme">@style/Theme.AndroidCleanArchitecture</item>
-    </style>
-
     <style name="Theme.AndroidCleanArchitecture" parent="android:Theme.Material.Light.NoActionBar" />
+
 </resources>

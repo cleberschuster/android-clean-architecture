@@ -59,9 +59,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Splash API
-    implementation (libs.androidx.core.splashscreen)
-
     // Kotlinx Serialization
     implementation(libs.kotlinx.serialization.json)
 

@@ -38,7 +38,6 @@ fun SearchTopBar(
     onSearchTextChanged: (String) -> Unit,
     onSearchDispatched: () -> Unit,
     onCleanTextPressed: () -> Unit,
-    onSearchIconPressed: () -> Unit
 ) {
     Box(
         modifier = modifier.height(56.dp)
@@ -69,7 +68,7 @@ fun SearchTopBar(
             singleLine = true,
             maxLines = 1,
             leadingIcon = {
-                SearchIcon(action = onSearchIconPressed)
+                SearchIcon()
             },
             trailingIcon = {
                 when (currentSearchText.isEmpty()) {
@@ -106,11 +105,10 @@ fun DefaultIcon(
 }
 
 @Composable
-fun SearchIcon(action: () -> Unit = {}) {
+fun SearchIcon() {
     DefaultIcon(
         searchIcon = Icons.Filled.Search,
         contentDescription = stringResource(id = R.string.icon_search),
-        onIconClickAction = action,
         iconColor = Color.Gray
     )
 }
@@ -133,7 +131,6 @@ fun SearchTopBarEmptyPreview() {
         onSearchTextChanged = {},
         onSearchDispatched = {},
         onCleanTextPressed = {},
-        onSearchIconPressed = {}
     )
 }
 
@@ -145,6 +142,5 @@ fun SearchTopBarPreview() {
         onSearchTextChanged = {},
         onSearchDispatched = {},
         onCleanTextPressed = {},
-        onSearchIconPressed = {}
     )
 }

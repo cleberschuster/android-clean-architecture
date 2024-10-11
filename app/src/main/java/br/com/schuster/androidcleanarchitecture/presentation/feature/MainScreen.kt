@@ -133,12 +133,6 @@ fun MainScreenContent(
                         onCleanTextPressed = {
                             onEvent(MainScreenEvent.OnValueChange(""))
                         },
-                        onSearchIconPressed = {
-                            coroutineScope.launch {
-
-                            }
-                        }
-
                     )
             },
                 colors = TopAppBarDefaults.topAppBarColors(

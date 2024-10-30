@@ -4,6 +4,7 @@ package br.com.schuster.androidcleanarchitecture.presentation.components
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardActions
@@ -40,7 +41,7 @@ fun SearchTopBar(
     onCleanTextPressed: () -> Unit,
 ) {
     Box(
-        modifier = modifier.height(56.dp)
+        modifier = modifier.height(56.dp).padding(end = 16.dp)
     ) {
         TextField(
             modifier = Modifier.clip(CircleShape.copy(all = CornerSize(10.dp))).fillMaxWidth(),

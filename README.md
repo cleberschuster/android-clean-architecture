@@ -1,1 +1,1 @@
-App com foco na implementação de Clean Architecture
+App com foco na implementação de Clean Architecture, MVVM, MVI

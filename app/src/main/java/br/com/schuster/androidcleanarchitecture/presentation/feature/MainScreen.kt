@@ -125,8 +125,8 @@ fun MainScreenContent(
                             onEvent(MainScreenEvent.OnValueChange(it))
                         },
                         onSearchDispatched = {
+                            keyboardController?.hide()
                             coroutineScope.launch {
-                                keyboardController?.hide()
                                 onEvent(MainScreenEvent.OnSearch)
                             }
                         },

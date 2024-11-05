@@ -24,7 +24,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
         // ApiState() ja inicializei os valores na propria classe
-        ScreenState()
+        UiState()
     )
 
     val uiState = _uiState.stateIn(

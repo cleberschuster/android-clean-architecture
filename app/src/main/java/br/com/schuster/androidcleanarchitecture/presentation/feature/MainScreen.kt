@@ -61,7 +61,7 @@ fun MainScreen(
 @Composable
 fun MainScreenContent(
     viewModel: MainViewModel,
-    uiStateValue: ScreenState,
+    uiStateValue: UiState,
     snackbarHostState: SnackbarHostState,
     onEvent: ( MainScreenEvent ) -> Unit
 ) {
@@ -152,7 +152,7 @@ fun MainScreenContent(
 }
 
 @Composable
-fun MainScreenUiState(uiStateValue: ScreenState, paddingValues: PaddingValues) {
+fun MainScreenUiState(uiStateValue: UiState, paddingValues: PaddingValues) {
 
     Column(
         modifier = Modifier

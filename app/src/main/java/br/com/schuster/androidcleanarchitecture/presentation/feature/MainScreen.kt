@@ -210,7 +210,7 @@ fun MainScreenUiState(uiStateValue: UiState, paddingValues: PaddingValues) {
 
             Status.LOADING -> ShimmerScreen()
 
-            Status.INPUT_ERROR -> ErrorScreenInputSearch(
+            Status.INPUT_TEXT_ERROR-> ErrorScreenInputSearch(
                 Modifier.fillMaxWidth()
                     .padding(top = 48.dp)
                 )

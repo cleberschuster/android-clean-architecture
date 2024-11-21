@@ -59,7 +59,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
 
                 _uiState.update { currentState ->
                     currentState.copy(
-                        status = Status.INPUT_ERROR,
+                        status = Status.INPUT_TEXT_ERROR,
                     )
                 }
                 return@launch

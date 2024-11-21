@@ -12,6 +12,6 @@ enum class Status {
     SUCCESS,
     ERROR,
     LOADING,
-    INPUT_ERROR
+    INPUT_TEXT_ERROR
 }
 

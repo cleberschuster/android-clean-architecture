@@ -1,6 +1,7 @@
 package br.com.schuster.androidcleanarchitecture.domain.usecase
 
 import br.com.schuster.androidcleanarchitecture.domain.repository.PostRepository
+import kotlinx.coroutines.flow.filter
 
 /*
 * Esta classe é responsável por realizar os casos de uso, chamando seu repository.
@@ -14,5 +15,7 @@ class PostUseCase(
     private val repository: PostRepository
 ) {
 
-    suspend operator fun invoke(id: Int) = repository.getPost(id)
+    suspend operator fun invoke(id: Int) = repository.getPost(id).filter {
+        it.id!! < 1000
+    }
 }

@@ -65,11 +65,11 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 return@launch
             }
 
-            getNewComment(textSearch)
+            getNewPost(textSearch)
         }
     }
 
-    private suspend fun getNewComment(id: String) {
+    private suspend fun getNewPost(id: String) {
 
         _uiState.update { it.copy(status = Status.LOADING) }
         delay(1000)

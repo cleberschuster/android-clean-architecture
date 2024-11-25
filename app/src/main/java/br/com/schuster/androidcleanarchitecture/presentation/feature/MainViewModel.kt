@@ -49,7 +49,6 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 searchPosts()
             }
         }
-
     }
 
     private fun searchPosts() {
@@ -65,15 +64,13 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 return@launch
             }
 
+            _uiState.update { it.copy(status = Status.LOADING) }
+            delay(1000)
             getNewPost(textSearch)
         }
     }
 
-    private suspend fun getNewPost(id: String) {
-
-        _uiState.update { it.copy(status = Status.LOADING) }
-        delay(1000)
-
+    private fun getNewPost(id: String) {
         useCase.invoke(id.toInt())
             .onEach { result ->
                 _uiState.update { currentState ->

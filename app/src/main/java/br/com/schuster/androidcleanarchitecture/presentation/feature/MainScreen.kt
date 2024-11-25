@@ -68,7 +68,7 @@ fun MainScreenContent(
 
     // official docomentation:
     // https://developer.android.com/develop/ui/compose/side-effects?hl=pt-br#remembercoroutinescope
-    val coroutineScope = rememberCoroutineScope()
+//    val coroutineScope = rememberCoroutineScope()
 
     val context = LocalContext.current
     val searchText = viewModel.textSearch
@@ -99,9 +99,9 @@ fun MainScreenContent(
             when (event) {
 
                 Lifecycle.Event.ON_START -> {
-                    coroutineScope.launch {
+//                    coroutineScope.launch {
                         onEvent(MainScreenEvent.OnSearch)
-                    }
+//                    }
                 }
                 else -> {}
             }
@@ -126,9 +126,9 @@ fun MainScreenContent(
                         },
                         onSearchDispatched = {
                             keyboardController?.hide()
-                            coroutineScope.launch {
+//                            coroutineScope.launch {
                                 onEvent(MainScreenEvent.OnSearch)
-                            }
+//                            }
                         },
                         onCleanTextPressed = {
                             onEvent(MainScreenEvent.OnValueChange(""))

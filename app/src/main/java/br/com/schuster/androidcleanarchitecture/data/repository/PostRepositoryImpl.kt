@@ -26,7 +26,7 @@ class PostRepositoryImpl(
 
     private val mapper: ObjectToPresentationMapper = ObjectToPresentationMapper()
 
-    override suspend fun getPost(id: Int): Flow<ObjectPresentation> = flow {
+    override fun getPost(id: Int): Flow<ObjectPresentation> = flow {
 
         val response = mapper.map(remoteDataSource.getPost(id))
         emit(response)

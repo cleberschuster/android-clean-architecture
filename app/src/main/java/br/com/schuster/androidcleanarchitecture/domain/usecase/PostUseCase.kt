@@ -15,7 +15,7 @@ class PostUseCase(
     private val repository: PostRepository
 ) {
 
-    suspend operator fun invoke(id: Int) = repository.getPost(id).filter {
+    operator fun invoke(id: Int) = repository.getPost(id).filter {
         it.id!! < 1000
     }
 }

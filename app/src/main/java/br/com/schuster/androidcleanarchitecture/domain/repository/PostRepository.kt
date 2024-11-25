@@ -4,5 +4,5 @@ import br.com.schuster.androidcleanarchitecture.presentation.model.ObjectPresent
 import kotlinx.coroutines.flow.Flow
 
 interface PostRepository {
-    suspend fun getPost(id: Int): Flow<ObjectPresentation>
+    fun getPost(id: Int): Flow<ObjectPresentation>
 }

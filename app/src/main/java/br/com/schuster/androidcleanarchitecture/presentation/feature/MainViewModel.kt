@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
-        // ApiState() ja inicializei os valores na propria classe
+        // UiState() ja inicializei os valores na propria classe
         UiState()
     )
 

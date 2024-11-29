@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,6 +39,7 @@ import br.com.schuster.androidcleanarchitecture.presentation.components.ErrorScr
 import br.com.schuster.androidcleanarchitecture.presentation.components.SearchTopBar
 import br.com.schuster.androidcleanarchitecture.presentation.components.ShimmerScreen
 import br.com.schuster.androidcleanarchitecture.presentation.ui.theme.PurpleGrey40
+import br.com.schuster.androidcleanarchitecture.utils.TestTags
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -165,9 +167,10 @@ fun MainScreenUiState(uiStateValue: UiState, paddingValues: PaddingValues) {
         when (uiStateValue.status) {
 
             Status.SUCCESS -> {
-
                 Text(
-                    modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
+                    modifier = Modifier
+                        .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 8.dp)
+                        .testTag(TestTags.COMMENT_TEXT),
                     text = "COMENTARIO: ${uiStateValue.data?.comment}",
                     style = TextStyle(fontSize = 16.sp)
                 )

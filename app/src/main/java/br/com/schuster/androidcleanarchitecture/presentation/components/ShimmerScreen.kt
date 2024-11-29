@@ -17,8 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.schuster.androidcleanarchitecture.utils.TestTags
 
 @Composable
 fun ShimmerScreen() {
@@ -32,6 +34,7 @@ fun ShimmerScreen() {
 //            .background(color = if (isLightModeActive) Color.White else Color.Black)
 //            .border(border = BorderStroke(width = 4.dp, color = Color.Black))
             .padding(top = 16.dp, start = 16.dp)
+            .testTag(TestTags.LOADING)
     ) {
         Column(
             modifier = Modifier

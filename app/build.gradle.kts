@@ -79,6 +79,8 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.retrofit)
 
+    implementation(libs.logging.interceptor)
+
     implementation(libs.koin.test)
     implementation(libs.mockito.kotlin)
     implementation(libs.mockwebserver)

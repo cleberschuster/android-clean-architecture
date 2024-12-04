@@ -4,12 +4,10 @@ import br.com.schuster.androidcleanarchitecture.data.api.PostApiService
 import br.com.schuster.androidcleanarchitecture.data.datasource.RemotePostDataSource
 import br.com.schuster.androidcleanarchitecture.data.datasource.RemotePostDataSourceImpl
 import br.com.schuster.androidcleanarchitecture.data.repository.PostRepositoryImpl
-import br.com.schuster.androidcleanarchitecture.data.retrofit.HttpClient
-import br.com.schuster.androidcleanarchitecture.data.retrofit.RetrofitClient
+import br.com.schuster.androidcleanarchitecture.data.retrofit.RetrofitService
 import br.com.schuster.androidcleanarchitecture.domain.repository.PostRepository
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
 import br.com.schuster.androidcleanarchitecture.presentation.feature.MainViewModel
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -33,9 +31,7 @@ val dataModules = module {
 }
 
 val networkModules = module {
-    single { RetrofitClient(application = androidContext()).newInstance() }
-    single { HttpClient(get()) }
-    factory { get<HttpClient>().create(PostApiService::class.java) }
+    single { RetrofitService.create<PostApiService>() }
 }
 
 val anotherModules = module {}

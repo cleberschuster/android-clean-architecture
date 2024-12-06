@@ -13,7 +13,7 @@ fun handleApiError(exception: Throwable): Any =
                 400 -> "Bad Request"
                 401 -> "Unauthorized. Please check your credentials."
                 403 -> "Forbidden. Access is denied."
-                404 -> "Resource not found."
+                404 -> "$statusCode recurso não encontrado, digite um ID válido"
                 500 -> "Internal Server Error. Please try again later."
                 503 -> "Service Unavailable. Please try again later."
                 else -> "Unexpected HTTP Error: $statusCode"

@@ -23,12 +23,10 @@ fun ErrorScreen(modifier: Modifier, uiStateError: String) {
         Image(
             painter = painterResource(
                 id = R.drawable.baseline_error_72),
-                contentDescription = "${stringResource(id = R.string.error_text)} $uiStateError," +
-                        " ${stringResource(id = R.string.enter_valid_id)}"
+                contentDescription = "${stringResource(id = R.string.error_text)} $uiStateError"
         )
         Text(
-            text = "${stringResource(id = R.string.error_text)} $uiStateError," +
-                    " ${stringResource(id = R.string.enter_valid_id)}",
+            text = "${stringResource(id = R.string.error_text)} $uiStateError,",
             modifier = Modifier.padding(16.dp))
     }
 }

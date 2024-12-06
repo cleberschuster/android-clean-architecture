@@ -87,6 +87,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                         errorMessage = handleApiError(it).toString()
                     )
                 }
-            }.launchIn(viewModelScope)
+            }
+            .launchIn(viewModelScope)
     }
 }

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.schuster.androidcleanarchitecture.R
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
-import br.com.schuster.androidcleanarchitecture.utils.toErrorType
+import br.com.schuster.androidcleanarchitecture.utils.handleApiError
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -81,18 +81,18 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 }
             }
             .catch {
-                if (it.toErrorType().toString() == "404") {
+                if (handleApiError(it) == "404") {
                     _uiState.update { currentState ->
                         currentState.copy(
                             status = Status.ERROR,
-                            errorMessage = it.toErrorType().toString()
+                            errorMessage = handleApiError(it).toString()
                         )
                     }
                 } else {
                     _uiState.update { currentState ->
                         currentState.copy(
                             status = Status.ERROR,
-                            errorMessage = it.toErrorType().toString()
+                            errorMessage = handleApiError(it).toString()
                         )
                     }
                 }

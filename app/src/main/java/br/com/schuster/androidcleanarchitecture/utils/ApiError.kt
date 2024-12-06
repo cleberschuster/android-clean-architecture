@@ -2,41 +2,22 @@ package br.com.schuster.androidcleanarchitecture.utils
 
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.concurrent.TimeoutException
 
-fun Throwable.toErrorType(): Any = when (this) {
-    is IOException -> ErrorType.Api.Network
-    is HttpException -> when (code()) {
-//        ErrorCodes.Http.ResourceNotFound -> ErrorType.Api.NotFound
-        ErrorCodes.Http.ResourceNotFound -> code()
-        ErrorCodes.Http.InternalServer -> ErrorType.Api.Server
-        ErrorCodes.Http.ServiceUnavailable -> ErrorType.Api.ServiceUnavailable
-        else -> ErrorType.Unknown
+fun handleApiError(exception: Throwable): Any =
+    when (exception) {
+        is TimeoutException -> "Request timed out. Please try again."
+        is IOException -> "Network error. Please check your connection."
+        is HttpException -> {
+            when (val statusCode = exception.code()) {
+                400 -> "Bad Request"
+                401 -> "Unauthorized. Please check your credentials."
+                403 -> "Forbidden. Access is denied."
+                404 -> "Resource not found."
+                500 -> "Internal Server Error. Please try again later."
+                503 -> "Service Unavailable. Please try again later."
+                else -> "Unexpected HTTP Error: $statusCode"
+            }
+        }
+        else -> "Unexpected error occurred: ${exception.message}"
     }
-    else -> ErrorType.Unknown
-}
-
-object ErrorCodes {
-
-    object Http {
-        const val InternalServer = 501
-        const val ServiceUnavailable = 503
-        const val ResourceNotFound = 404
-    }
-}
-
-sealed class ErrorType {
-
-    sealed class Api: ErrorType() {
-
-        data object Network: Api()
-
-        data object ServiceUnavailable : Api()
-
-        data object NotFound : Api()
-
-        data object Server : Api()
-
-    }
-
-    data object Unknown: ErrorType()
-}

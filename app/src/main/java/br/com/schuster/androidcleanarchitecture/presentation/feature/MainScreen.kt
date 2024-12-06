@@ -217,6 +217,8 @@ fun MainScreenUiState(uiStateValue: UiState, paddingValues: PaddingValues) {
                 Modifier.fillMaxWidth()
                     .padding(top = 48.dp)
                 )
+
+            Status.IDLE -> {}
         }
     }
 }

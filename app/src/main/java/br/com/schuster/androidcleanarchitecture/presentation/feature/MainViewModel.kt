@@ -33,7 +33,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
         initialValue = _uiState.value
     )
 
-    var textSearch by mutableStateOf("1")
+    var textSearch by mutableStateOf("")
         private set
 
     private var _uiEvent = Channel<UiEvent>()

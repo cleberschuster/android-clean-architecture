@@ -81,20 +81,11 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 }
             }
             .catch {
-                if (handleApiError(it) == "404") {
-                    _uiState.update { currentState ->
-                        currentState.copy(
-                            status = Status.ERROR,
-                            errorMessage = handleApiError(it).toString()
-                        )
-                    }
-                } else {
-                    _uiState.update { currentState ->
-                        currentState.copy(
-                            status = Status.ERROR,
-                            errorMessage = handleApiError(it).toString()
-                        )
-                    }
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        status = Status.ERROR,
+                        errorMessage = handleApiError(it).toString()
+                    )
                 }
             }.launchIn(viewModelScope)
     }

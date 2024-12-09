@@ -41,15 +41,22 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
 
     fun onEvent(event: MainScreenEvent) {
         when (event) {
+
             is MainScreenEvent.OnValueChange -> {
                 textSearch = event.searchText.trim()
             }
-
             is MainScreenEvent.OnSearch -> {
-                viewModelScope.launch {
-                    searchPosts()
-                }
+                findPost()
             }
+            is MainScreenEvent.OnClickSearch -> {
+                findPost()
+            }
+        }
+    }
+
+    private fun findPost() {
+        viewModelScope.launch {
+            searchPosts()
         }
     }
 

@@ -12,7 +12,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -70,24 +70,28 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
     }
 
     private fun getNewPost(id: String) {
+
         _uiState.update { it.copy(status = Status.LOADING) }
-        useCase.invoke(id.toInt())
-            .onEach { result ->
-                _uiState.update { currentState ->
-                    currentState.copy(
-                        status = Status.SUCCESS,
-                        data = result,
-                    )
+
+        viewModelScope.launch {
+            useCase.invoke(id.toInt())
+                .onEach { result ->
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            status = Status.SUCCESS,
+                            data = result,
+                        )
+                    }
                 }
-            }
-            .catch {
-                _uiState.update { currentState ->
-                    currentState.copy(
-                        status = Status.ERROR,
-                        errorMessage = handleApiError(it).toString()
-                    )
+                .catch {
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            status = Status.ERROR,
+                            errorMessage = handleApiError(it).toString()
+                        )
+                    }
                 }
-            }
-            .launchIn(viewModelScope)
+                .collect()
+        }
     }
 }

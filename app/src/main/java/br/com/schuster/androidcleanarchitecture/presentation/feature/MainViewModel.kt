@@ -33,7 +33,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
         initialValue = _uiState.value
     )
 
-    var textSearch by mutableStateOf("")
+    var textSearch by mutableStateOf("3")
         private set
 
     private var _uiEvent = Channel<UiEvent>()
@@ -46,28 +46,32 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
             }
 
             is MainScreenEvent.OnSearch -> {
-                searchPosts()
+                viewModelScope.launch {
+                    searchPosts()
+                }
             }
         }
     }
 
-    private fun searchPosts() {
-        viewModelScope.launch {
-            if (textSearch.isBlank()) {
-                _uiEvent.send(UiEvent.ShowSnackbar(resId = R.string.search_not_empty))
+    private suspend fun searchPosts() {
 
-                _uiState.update { currentState ->
-                    currentState.copy(
-                        status = Status.INPUT_TEXT_ERROR,
-                    )
-                }
-                return@launch
+        if (textSearch.isBlank()) {
+            _uiEvent.send(UiEvent.ShowSnackbar(resId = R.string.search_not_empty))
+
+            _uiState.update { currentState ->
+                currentState.copy(
+                    status = Status.INPUT_TEXT_ERROR,
+                )
             }
-
-            _uiState.update { it.copy(status = Status.LOADING) }
-            delay(1000)
-            getNewPost(textSearch)
+            return
         }
+        initGetNewPost()
+    }
+
+    private suspend fun initGetNewPost() {
+        _uiState.update { it.copy(status = Status.LOADING) }
+        delay(1000)
+        getNewPost(textSearch)
     }
 
     private fun getNewPost(id: String) {

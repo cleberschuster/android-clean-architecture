@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Android Clean Architecture"
 include(":app")
-include(":product")

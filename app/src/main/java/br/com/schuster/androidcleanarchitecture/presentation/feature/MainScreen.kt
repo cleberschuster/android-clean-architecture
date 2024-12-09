@@ -20,7 +20,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -40,7 +39,6 @@ import br.com.schuster.androidcleanarchitecture.presentation.components.SearchTo
 import br.com.schuster.androidcleanarchitecture.presentation.components.ShimmerScreen
 import br.com.schuster.androidcleanarchitecture.presentation.ui.theme.PurpleGrey40
 import br.com.schuster.androidcleanarchitecture.utils.TestTags
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -67,10 +65,6 @@ fun MainScreenContent(
     snackbarHostState: SnackbarHostState,
     onEvent: ( MainScreenEvent ) -> Unit
 ) {
-
-    // official docomentation:
-    // https://developer.android.com/develop/ui/compose/side-effects?hl=pt-br#remembercoroutinescope
-    val coroutineScope = rememberCoroutineScope()
 
     val context = LocalContext.current
     val searchText = viewModel.textSearch
@@ -101,9 +95,7 @@ fun MainScreenContent(
             when (event) {
 
                 Lifecycle.Event.ON_START -> {
-                    coroutineScope.launch {
-                        onEvent(MainScreenEvent.OnSearch)
-                    }
+                    onEvent(MainScreenEvent.OnSearch)
                 }
                 else -> {}
             }
@@ -121,21 +113,19 @@ fun MainScreenContent(
     Scaffold(
         topBar = {
             TopAppBar( {
-                    SearchTopBar(
-                        currentSearchText = searchText,
-                        onSearchTextChanged = {
-                            onEvent(MainScreenEvent.OnValueChange(it))
-                        },
-                        onSearchDispatched = {
-                            keyboardController?.hide()
-                            coroutineScope.launch {
-                                onEvent(MainScreenEvent.OnClickSearch)
-                            }
-                        },
-                        onCleanTextPressed = {
-                            onEvent(MainScreenEvent.OnValueChange(""))
-                        },
-                    )
+                SearchTopBar(
+                    currentSearchText = searchText,
+                    onSearchTextChanged = {
+                        onEvent(MainScreenEvent.OnValueChange(it))
+                    },
+                    onSearchDispatched = {
+                        keyboardController?.hide()
+                        onEvent(MainScreenEvent.OnClickSearch)
+                    },
+                    onCleanTextPressed = {
+                        onEvent(MainScreenEvent.OnValueChange(""))
+                    },
+                )
             },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = PurpleGrey40
@@ -207,7 +197,7 @@ fun MainScreenUiState(uiStateValue: UiState, paddingValues: PaddingValues) {
             Status.ERROR -> {
                 ErrorScreen(
                     Modifier.fillMaxWidth()
-                    .padding(top = 48.dp),
+                        .padding(top = 48.dp),
                     uiStateError = uiStateValue.errorMessage.toString())
             }
 
@@ -216,7 +206,7 @@ fun MainScreenUiState(uiStateValue: UiState, paddingValues: PaddingValues) {
             Status.INPUT_TEXT_ERROR-> ErrorScreenInputSearch(
                 Modifier.fillMaxWidth()
                     .padding(top = 48.dp)
-                )
+            )
 
             Status.IDLE -> {}
         }

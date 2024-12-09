@@ -9,7 +9,6 @@ import br.com.schuster.androidcleanarchitecture.R
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
 import br.com.schuster.androidcleanarchitecture.utils.handleApiError
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.catch
@@ -46,38 +45,33 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 textSearch = event.searchText.trim()
             }
             is MainScreenEvent.OnSearch -> {
-                findPost()
+                searchPosts()
             }
             is MainScreenEvent.OnClickSearch -> {
-                findPost()
+                searchPosts()
             }
         }
     }
 
-    private fun findPost() {
+    private fun searchPosts() {
         viewModelScope.launch {
-            searchPosts()
-        }
-    }
+            if (textSearch.isBlank()) {
+                _uiEvent.send(UiEvent.ShowSnackbar(resId = R.string.search_not_empty))
 
-    private suspend fun searchPosts() {
-
-        if (textSearch.isBlank()) {
-            _uiEvent.send(UiEvent.ShowSnackbar(resId = R.string.search_not_empty))
-
-            _uiState.update { currentState ->
-                currentState.copy(
-                    status = Status.INPUT_TEXT_ERROR,
-                )
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        status = Status.INPUT_TEXT_ERROR,
+                    )
+                }
+                return@launch
             }
-            return
+            initGetNewPost()
         }
-        initGetNewPost()
     }
 
-    private suspend fun initGetNewPost() {
+    private fun initGetNewPost() {
         _uiState.update { it.copy(status = Status.LOADING) }
-        delay(1000)
+//        delay(1000)
         getNewPost(textSearch)
     }
 

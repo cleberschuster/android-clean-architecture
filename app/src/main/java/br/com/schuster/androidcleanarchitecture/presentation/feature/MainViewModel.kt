@@ -45,16 +45,20 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 textSearch = event.searchText.trim()
             }
             is MainScreenEvent.OnSearch -> {
-                searchPosts()
+                getNewPost(textSearch)
             }
             is MainScreenEvent.OnClickSearch -> {
-                searchPosts()
+                getNewPost(textSearch)
             }
         }
     }
 
-    private fun searchPosts() {
+    private fun getNewPost(id: String) {
+
+        _uiState.update { it.copy(status = Status.LOADING) }
+
         viewModelScope.launch {
+
             if (textSearch.isBlank()) {
                 _uiEvent.send(UiEvent.ShowSnackbar(resId = R.string.search_not_empty))
 
@@ -65,15 +69,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
                 }
                 return@launch
             }
-            getNewPost(textSearch)
-        }
-    }
 
-    private fun getNewPost(id: String) {
-
-        _uiState.update { it.copy(status = Status.LOADING) }
-
-        viewModelScope.launch {
             useCase.invoke(id.toInt())
                 .onEach { result ->
                     _uiState.update { currentState ->

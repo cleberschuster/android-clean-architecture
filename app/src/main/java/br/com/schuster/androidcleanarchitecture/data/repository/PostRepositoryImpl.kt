@@ -4,7 +4,7 @@ import br.com.schuster.androidcleanarchitecture.data.datasource.RemotePostDataSo
 import br.com.schuster.androidcleanarchitecture.domain.mapper.ObjectToPresentationMapper
 import br.com.schuster.androidcleanarchitecture.domain.repository.PostRepository
 import br.com.schuster.androidcleanarchitecture.presentation.model.ObjectPresentation
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -21,7 +21,8 @@ import kotlinx.coroutines.flow.flowOn
 */
 
 class PostRepositoryImpl(
-    private val remoteDataSource: RemotePostDataSource
+    private val remoteDataSource: RemotePostDataSource,
+    private val dispatcherIO: CoroutineDispatcher
 ) : PostRepository {
 
     private val mapper: ObjectToPresentationMapper = ObjectToPresentationMapper()
@@ -31,7 +32,7 @@ class PostRepositoryImpl(
         val response = mapper.map(remoteDataSource.getPost(id))
         emit(response)
 
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(dispatcherIO)
 }
 
 

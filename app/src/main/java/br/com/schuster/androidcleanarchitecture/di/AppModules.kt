@@ -8,6 +8,7 @@ import br.com.schuster.androidcleanarchitecture.data.retrofit.RetrofitService
 import br.com.schuster.androidcleanarchitecture.domain.repository.PostRepository
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
 import br.com.schuster.androidcleanarchitecture.presentation.feature.MainViewModel
+import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -27,7 +28,7 @@ val presentationModules = module {
 
 val dataModules = module {
     factory<RemotePostDataSource> { RemotePostDataSourceImpl(api = get()) }
-    factory<PostRepository> { PostRepositoryImpl(remoteDataSource = get()) }
+    factory<PostRepository> { PostRepositoryImpl(remoteDataSource = get(), dispatcherIO = Dispatchers.IO) }
 }
 
 val networkModules = module {

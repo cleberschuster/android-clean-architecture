@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.google.services)
     kotlin("plugin.serialization") version libs.versions.kotlin
 }
 
@@ -59,6 +60,10 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging)
+
     // Kotlinx Serialization
     implementation(libs.kotlinx.serialization.json)
 
@@ -84,6 +89,8 @@ dependencies {
     implementation(libs.koin.test)
     implementation(libs.mockito.kotlin)
     implementation(libs.mockwebserver)
+    implementation(libs.core.ktx)
+    implementation(libs.google.firebase.messaging)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

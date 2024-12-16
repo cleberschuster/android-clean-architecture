@@ -2,7 +2,7 @@ package br.com.schuster.androidcleanarchitecture.presentation.feature
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import br.com.schuster.androidcleanarchitecture.BaseUnitTest
-import br.com.schuster.androidcleanarchitecture.MainCoroutineRule
+import br.com.schuster.androidcleanarchitecture.CoroutineRule
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
 import br.com.schuster.androidcleanarchitecture.presentation.model.ObjectPresentation
 import com.google.common.truth.Truth.assertThat
@@ -27,7 +27,7 @@ class MainViewModelTest : BaseUnitTest() {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @get:Rule
-    val coroutineRule = MainCoroutineRule()
+    val coroutineRule = CoroutineRule()
 
     @Before
     fun setUp() {

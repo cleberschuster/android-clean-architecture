@@ -33,7 +33,11 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
     )
 
     var textSearch by mutableStateOf("")
-        private set
+    private set
+
+    fun updateTextSearch(newText: String) {
+        textSearch = newText
+    }
 
     private var _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
@@ -42,7 +46,7 @@ class MainViewModel(private val useCase: PostUseCase) : ViewModel() {
         when (event) {
 
             is MainScreenEvent.OnValueChange -> {
-                textSearch = event.searchText.trim()
+                updateTextSearch(event.searchText.trim())
             }
             is MainScreenEvent.OnSearch -> {
                 getNewPost(textSearch)

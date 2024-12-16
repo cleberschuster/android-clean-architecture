@@ -5,7 +5,6 @@ import br.com.schuster.androidcleanarchitecture.BaseUnitTest
 import br.com.schuster.androidcleanarchitecture.CoroutineRule
 import br.com.schuster.androidcleanarchitecture.domain.usecase.PostUseCase
 import br.com.schuster.androidcleanarchitecture.presentation.model.ObjectPresentation
-import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -63,8 +62,7 @@ class MainViewModelTest : BaseUnitTest() {
         )
         coEvery { useCase.invoke(any()) } returns flowOf(post)
 
-        viewModel.updateTextSearch(searchText)
-        assertThat(viewModel.textSearch).isEqualTo(searchText)
+        viewModel.onEvent(MainScreenEvent.OnValueChange(searchText))
 
         viewModel.onEvent(MainScreenEvent.OnSearch)
 
@@ -89,11 +87,9 @@ class MainViewModelTest : BaseUnitTest() {
         )
         coEvery { useCase.invoke(any()) } returns flowOf(post)
 
-        viewModel.updateTextSearch(searchText)
-        assertThat(viewModel.textSearch).isEqualTo(searchText)
+        viewModel.onEvent(MainScreenEvent.OnValueChange(searchText))
 
         viewModel.onEvent(MainScreenEvent.OnClickSearch)
-        viewModel.onEvent(MainScreenEvent.OnSearch)
 
         coroutineRule.dispatcher.scheduler.advanceUntilIdle()
         coVerify { useCase.invoke(searchText.toInt()) }

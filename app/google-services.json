@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "178864992793",
+    "project_id": "romotepushnotifications",
+    "storage_bucket": "romotepushnotifications.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178864992793:android:f81ba17bd877b0df47f088",
+        "android_client_info": {
+          "package_name": "br.com.schuster.androidcleanarchitecture"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBurz0kUvC7n8xzYoEkfN5If0DCtcNUSHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -92,7 +92,19 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.google.firebase.messaging)
 
+//    testImplementation(libs.junit)
+
+        // Local Tests
     testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.mockk)
+//    debugImplementation(libs.ui.test.manifest)
+
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

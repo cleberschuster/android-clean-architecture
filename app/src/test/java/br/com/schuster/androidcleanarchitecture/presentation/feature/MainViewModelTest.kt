@@ -42,7 +42,7 @@ class MainViewModelTest : BaseUnitTest() {
         assertEquals(UiState(), uiState)
     }
 
-        @Test
+    @Test
     fun `onEvent OnValueChange should update textSearch`() {
         val newText = "new text"
         viewModel.onEvent(MainScreenEvent.OnValueChange(newText))
@@ -76,7 +76,7 @@ class MainViewModelTest : BaseUnitTest() {
     }
 
 
-        @Test
+    @Test
     fun `onEvent OnClickSearch should return Status SUCCESS`() = runTest {
         val searchText = "123"
         val post = ObjectPresentation(

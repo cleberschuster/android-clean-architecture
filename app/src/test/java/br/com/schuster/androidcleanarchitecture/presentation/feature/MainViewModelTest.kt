@@ -38,6 +38,11 @@ class MainViewModelTest : BaseUnitTest() {
     }
 
     @Test
+    fun `initial state should be IDLE`() = runTest {
+        assertEquals(Status.IDLE, viewModel.uiState.value.status)
+    }
+
+    @Test
     fun getUiState() {
         viewModel = MainViewModel(useCase)
         val uiState = uiState.value

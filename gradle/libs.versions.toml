@@ -20,6 +20,7 @@ okhttp = "4.12.0"
 converterGson = "2.10.0"
 gson = "2.10.1"
 retrofit = "2.10.0"
+turbine = "1.2.0"
 workRuntime = "2.9.1"
 kotlinxSerialization = "1.7.1"
 navigation = "2.8.2"
@@ -79,6 +80,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 google-firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

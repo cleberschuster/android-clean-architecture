@@ -102,6 +102,7 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockwebserver)
     testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
 //    debugImplementation(libs.ui.test.manifest)
 
 

@@ -117,7 +117,7 @@ class MainViewModelTest : BaseUnitTest() {
 
                 assertEquals(Status.ERROR, awaitItem().status)
                 assertEquals(exception.toString(), awaitItem().errorMessage)
-
+                cancelAndIgnoreRemainingEvents()
             }
 
         coVerify { useCase.invoke(searchText.toInt()) }
